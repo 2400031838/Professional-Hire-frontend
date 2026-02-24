@@ -4,23 +4,30 @@ function Home() {
   const navigate = useNavigate();
 
   return (
-    <div style={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      height: "80vh",
-      textAlign: "center"
-    }}>
-      <h1>Welcome to ProHire</h1>
+    <div
+      style={{
+        height: "90vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+        color: "white",
+        textAlign: "center"
+      }}
+    >
+      <h1 style={{ fontSize: "40px", marginBottom: "20px" }}>
+        Welcome to ProHire 🚀
+      </h1>
 
       <button
-        onClick={() => navigate("/login")}
         style={{
-          marginTop: "20px",
-          padding: "10px 20px",
+          padding: "12px 25px",
+          fontSize: "16px",
+          borderRadius: "8px",
+          border: "none",
           cursor: "pointer"
         }}
+        onClick={() => navigate("/login")}
       >
         Get Started
       </button>

@@ -1,66 +1,43 @@
-/* ==============================
-   GLOBAL RESET
-================================ */
+/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", Arial, sans-serif;
+  font-family: "Segoe UI", sans-serif;
 }
 
-/* ==============================
-   FULL WEBSITE BACKGROUND
-================================ */
+/* REMOVE VITE DEFAULT WHITE BACKGROUND */
+#root {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+
+/* FULL SCREEN ANIMATED BACKGROUND */
+html, body {
+  height: 100%;
+}
+
 body {
   min-height: 100vh;
-  background: linear-gradient(135deg, #dbeafe, #e0f2fe, #f1f5f9);
+  background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1e3c72);
   background-size: 400% 400%;
   animation: gradientMove 12s ease infinite;
+  overflow-x: hidden;
 }
 
-/* Animated gradient effect */
+/* ANIMATION */
 @keyframes gradientMove {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* ==============================
-   HEADINGS
-================================ */
-h1 {
-  font-size: 30px;
-  font-weight: 600;
-}
-
-h2 {
-  font-size: 22px;
-  font-weight: 600;
-}
-
-h3 {
-  font-size: 18px;
-}
-
-/* ==============================
-   BUTTON EFFECT
-================================ */
-button {
-  transition: 0.3s ease;
-}
-
-button:hover {
-  transform: scale(1.05);
-}
-
-/* ==============================
-   ZOOM EFFECT (Cards)
-================================ */
+/* SMOOTH HOVER EFFECT */
 .zoom-hover {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: 0.3s ease;
 }
 
 .zoom-hover:hover {
   transform: scale(1.05);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }

@@ -1,37 +1,28 @@
-/* Navbar container */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 18px 60px;
   background: linear-gradient(90deg, #0f172a, #1e293b);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Logo */
 .logo {
   color: white;
   font-size: 22px;
   font-weight: 600;
-  letter-spacing: 1px;
 }
 
-/* Navigation container */
 .nav-links {
   display: flex;
   gap: 30px;
 }
 
-/* Links */
 .nav-links a {
-  color: #e2e8f0;
+  color: white;
   text-decoration: none;
-  font-size: 16px;
   font-weight: 500;
-  transition: 0.3s ease;
 }
 
-/* Hover effect */
 .nav-links a:hover {
   color: #38bdf8;
 }

@@ -1,23 +1,44 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../index.css";
 
 function Login() {
   const navigate = useNavigate();
   const [role, setRole] = useState("");
+  const [captchaText, setCaptchaText] = useState("");
+  const [userInput, setUserInput] = useState("");
+
+  useEffect(() => {
+    generateCaptcha();
+  }, []);
+
+  const generateCaptcha = () => {
+    const chars =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let result = "";
+    for (let i = 0; i < 5; i++) {
+      result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    setCaptchaText(result);
+  };
 
   const handleLogin = () => {
-    if (role === "User") {
-      navigate("/user-dashboard");
-    } else if (role === "Professional") {
-      navigate("/professional-dashboard");
-    } else if (role === "Admin") {
-      navigate("/admin-dashboard");
-    } else if (role === "Support") {
-      navigate("/support-dashboard");
-    } else {
-      alert("Please select a role to login");
+    if (userInput !== captchaText) {
+      alert("Incorrect CAPTCHA. Try again.");
+      generateCaptcha();
+      setUserInput("");
+      return;
     }
+
+    if (!role) {
+      alert("Please select a role");
+      return;
+    }
+
+    if (role === "User") navigate("/user-dashboard");
+    else if (role === "Professional") navigate("/professional-dashboard");
+    else if (role === "Admin") navigate("/admin-dashboard");
+    else if (role === "Support") navigate("/support-dashboard");
   };
 
   return (
@@ -30,17 +51,16 @@ function Login() {
       }}
     >
       <div
-        className="zoom-hover"
+        className="glass-card"
         style={{
-          width: "350px",
+          width: "380px",
           padding: "40px",
-          backgroundColor: "white",
-          borderRadius: "10px",
-          boxShadow: "0 8px 20px rgba(0,0,0,0.1)",
+          borderRadius: "15px",
           textAlign: "center",
+          color: "white",
         }}
       >
-        <h2 style={{ marginBottom: "25px" }}>Login to ProHire</h2>
+        <h2 style={{ marginBottom: "25px" }}>Login to ProHire 🚀</h2>
 
         <input
           type="email"
@@ -54,10 +74,11 @@ function Login() {
           style={inputStyle}
         />
 
+        {/* ROLE DROPDOWN (VISIBLE FIXED VERSION) */}
         <select
-          style={inputStyle}
           value={role}
           onChange={(e) => setRole(e.target.value)}
+          style={selectStyle}
         >
           <option value="">Select Role</option>
           <option value="User">User</option>
@@ -66,11 +87,31 @@ function Login() {
           <option value="Support">Support</option>
         </select>
 
-        <button
-          className="zoom-hover"
-          style={buttonStyle}
-          onClick={handleLogin}
+        {/* CAPTCHA DISPLAY */}
+        <div
+          style={{
+            margin: "15px 0",
+            fontSize: "20px",
+            letterSpacing: "4px",
+            fontWeight: "bold",
+            background: "rgba(255,255,255,0.15)",
+            padding: "8px",
+            borderRadius: "6px",
+            userSelect: "none",
+          }}
         >
+          {captchaText}
+        </div>
+
+        <input
+          type="text"
+          placeholder="Enter CAPTCHA"
+          value={userInput}
+          onChange={(e) => setUserInput(e.target.value)}
+          style={inputStyle}
+        />
+
+        <button style={buttonStyle} onClick={handleLogin}>
           Login
         </button>
       </div>
@@ -80,20 +121,34 @@ function Login() {
 
 const inputStyle = {
   width: "100%",
-  padding: "10px",
+  padding: "12px",
   marginBottom: "15px",
-  borderRadius: "6px",
+  borderRadius: "8px",
+  border: "1px solid rgba(255,255,255,0.3)",
+  background: "rgba(255,255,255,0.1)",
+  color: "white",
+  outline: "none",
+};
+
+const selectStyle = {
+  width: "100%",
+  padding: "12px",
+  marginBottom: "15px",
+  borderRadius: "8px",
   border: "1px solid #ccc",
+  backgroundColor: "white",
+  color: "black",
 };
 
 const buttonStyle = {
   width: "100%",
   padding: "12px",
-  backgroundColor: "#2563eb",
+  background: "linear-gradient(90deg, #3b82f6, #6366f1)",
   color: "white",
   border: "none",
-  borderRadius: "6px",
+  borderRadius: "8px",
   cursor: "pointer",
+  fontWeight: "600",
 };
 
 export default Login;
