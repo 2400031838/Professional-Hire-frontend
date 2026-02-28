@@ -1,3 +1,4 @@
+// Login.jsx - A simple login page with role selection and CAPTCHA verification
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../index.css";
