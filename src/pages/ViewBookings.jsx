@@ -1,3 +1,4 @@
+// ViewBookings.jsx - A page to display all bookings made by clients, accessible by support agents
 function ViewBookings() {
   const bookings =
     JSON.parse(localStorage.getItem("bookings")) || [];
