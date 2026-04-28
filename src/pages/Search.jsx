@@ -16,7 +16,7 @@ function Search() {
   const filteredProfessionals = professionals.filter((pro) =>
     pro.skill.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
+ 
   const handleHire = (id) => {
     setHiredIds([...hiredIds, id]);
   };
