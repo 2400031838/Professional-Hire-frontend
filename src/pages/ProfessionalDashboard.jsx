@@ -11,12 +11,10 @@ function ProfessionalDashboard() {
   const [clients, setClients] = useState(0);
   const [bookings, setBookings] = useState([]);
 
-  // Safe localStorage handling
-  const user = JSON.parse(localStorage.getItem("user")) || {};
+  const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
-    // Stop if email not found
-    if (!user.email) return;
+    if (!user || !user.email) return;
 
     const fetchBookings = () => {
       fetch(`${BASE_URL}/booking/professional/${user.email}`)
@@ -45,7 +43,7 @@ function ProfessionalDashboard() {
     const interval = setInterval(fetchBookings, 5000);
 
     return () => clearInterval(interval);
-  }, [user.email]);
+  }, [user]);
 
   return (
     <div style={{ padding: "40px", color: "white" }}>
@@ -54,11 +52,22 @@ function ProfessionalDashboard() {
       <h2>Total Earnings: ₹{earnings}</h2>
       <h2>Total Bookings: {clients}</h2>
 
-      <button onClick={() => navigate("/add-service")}>
+      <button
+        onClick={() => navigate("/add-service")}
+        style={{
+          padding: "10px 20px",
+          background: "#2563eb",
+          color: "white",
+          border: "none",
+          borderRadius: "8px",
+          marginTop: "20px",
+          cursor: "pointer"
+        }}
+      >
         Add Service
       </button>
 
-      <h2 style={{ marginTop: "30px" }}>My Bookings</h2>
+      <h2 style={{ marginTop: "40px" }}>My Bookings</h2>
 
       {bookings.length === 0 ? (
         <p>No bookings yet.</p>
@@ -73,10 +82,25 @@ function ProfessionalDashboard() {
               borderRadius: "10px"
             }}
           >
-            <p><strong>Service:</strong> {b.service}</p>
-            <p><strong>Price:</strong> ₹{b.price}</p>
-            <p><strong>Date:</strong> {b.date}</p>
-            <p><strong>Time:</strong> {b.time}</p>
+            <p>
+              <strong>Service:</strong> {b.service}
+            </p>
+
+            <p>
+              <strong>Price:</strong> ₹{b.price}
+            </p>
+
+            <p>
+              <strong>Date:</strong> {b.date}
+            </p>
+
+            <p>
+              <strong>Time:</strong> {b.time}
+            </p>
+
+            <p style={{ color: "#22c55e" }}>
+              Hired ✅
+            </p>
           </div>
         ))
       )}
